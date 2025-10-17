@@ -1,0 +1,146 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif; /* Using a modern, clean font */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(to right, #4facfe, #00f2fe); /* Fresh gradient background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Prevent scrollbars if content is slightly larger */
+}
+
+/* Add a Google Fonts import if using a specific font like Montserrat */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+
+.calculator-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 100px); /* 4 columns, 100px each */
+    grid-template-rows: minmax(120px, auto) repeat(5, 80px); /* Display row + 5 button rows */
+    background-color: rgba(0, 0, 0, 0.8); /* Darker, slightly transparent background */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); /* Soft shadow */
+    overflow: hidden; /* Ensure border-radius applies */
+}
+
+.output {
+    grid-column: 1 / -1; /* Spans all columns */
+    background-color: rgba(0, 0, 0, .75);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Align text to the right */
+    justify-content: space-around; /* Space out previous and current operands */
+    padding: 10px;
+    word-wrap: break-word; /* Allow numbers to wrap */
+    word-break: break-all; /* Break words at any character */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.output .previous-operand {
+    color: rgba(255, 255, 255, .75);
+    font-size: 1.5rem;
+    padding-bottom: 5px; /* Space between previous and current */
+}
+
+.output .current-operand {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 600; /* Bolder for current number */
+}
+
+button {
+    cursor: pointer;
+    font-size: 1.75rem;
+    border: 1px solid rgba(0, 0, 0, 0.2); /* Subtle border for separation */
+    outline: none;
+    background-color: rgba(255, 255, 255, .1); /* Slightly transparent white buttons */
+    color: white;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out; /* Smooth transitions */
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, .25);
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+button:active {
+    background-color: rgba(255, 255, 255, .35);
+    transform: translateY(0); /* Return to original position */
+}
+
+.span-two {
+    grid-column: span 2; /* Make button span two columns */
+}
+
+button[data-operation],
+button[data-equals] {
+    background-color: #f7931b; /* Orange for operations and equals */
+    color: white;
+}
+
+button[data-operation]:hover,
+button[data-equals]:hover {
+    background-color: #ffa42c;
+}
+
+button[data-all-clear] {
+    background-color: #d32f2f; /* Red for clear button */
+}
+
+button[data-all-clear]:hover {
+    background-color: #e53935;
+}
+
+button[data-delete] {
+    background-color: #5d5d5d; /* Darker grey for delete */
+}
+
+button[data-delete]:hover {
+    background-color: #6d6d6d;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+    .calculator-grid {
+        grid-template-columns: repeat(4, 75px);
+        grid-template-rows: minmax(100px, auto) repeat(5, 70px);
+        width: 100%;
+        margin: 10px;
+    }
+
+    button {
+        font-size: 1.5rem;
+    }
+
+    .output .previous-operand {
+        font-size: 1.2rem;
+    }
+
+    .output .current-operand {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 350px) {
+    .calculator-grid {
+        grid-template-columns: repeat(4, 60px);
+        grid-template-rows: minmax(80px, auto) repeat(5, 60px);
+    }
+
+    button {
+        font-size: 1.2rem;
+    }
+
+    .output .previous-operand {
+        font-size: 1rem;
+    }
+
+    .output .current-operand {
+        font-size: 1.8rem;
+    }
+}
